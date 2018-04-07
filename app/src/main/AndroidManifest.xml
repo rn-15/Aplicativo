@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="br.com.hlnengenharia.app">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_hln"
+        android:label="HLN Engenharia"
+        android:roundIcon="@drawable/ic_hln"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".cadastro.CadUsuarioActivity" />
+        <activity android:name=".listas.ListaUsuariosActivity" />
+        <activity android:name=".LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".listas.ListaEmpresasActivity" />
+        <activity android:name=".cadastro.CadEmpresaActivity" />
+        <activity android:name=".listas.ListaUnidadesActivity" />
+        <activity android:name=".cadastro.CadUnidadeActivity" />
+        <activity android:name=".listas.ListaInspecaoActivity" />
+        <activity android:name=".cadastro.CadInspecaoActivity" />
+        <activity android:name=".listas.ListaSetoresActivity" />
+        <activity android:name=".cadastro.CadSetorActivity" />
+        <activity android:name=".TelaDepoisDoLoginActivity" />
+        <activity android:name=".cadastro.CadPerguntaActivity" />
+        <activity
+            android:name=".InspecaoActivity"
+            android:label="@string/title_activity_inspecao"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
+    </application>
+
+</manifest>

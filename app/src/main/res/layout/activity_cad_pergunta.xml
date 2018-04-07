@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_margin="8dp"
+    app:cardCornerRadius="8dp"
+    tools:context=".cadastro.CadPerguntaActivity">
+
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/codigo_insp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="codigo inspecao"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/nome_insp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toEndOf="@+id/nome_insp"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/nome_insp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="nome inspecao"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/setor_insp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/setor_insp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="setor inspecao"
+            android:visibility="invisible"
+            app:layout_constraintBottom_toTopOf="@+id/pergunta"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <EditText
+            android:id="@+id/pergunta"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="8dp"
+            android:layout_marginBottom="8dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="184dp"
+            android:gravity="center"
+            android:hint="Pergunta"
+            android:inputType="none"
+            app:layout_constraintBottom_toTopOf="@+id/salvar_pergunta"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.78" />
+
+        <Button
+            android:id="@+id/salvar_pergunta"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/fundoretangulo"
+            android:text="Salvar"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.65" />
+    </android.support.constraint.ConstraintLayout>
+
+
+</android.support.v7.widget.CardView>
