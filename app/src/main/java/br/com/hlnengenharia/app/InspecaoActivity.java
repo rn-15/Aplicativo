@@ -31,16 +31,17 @@ public class InspecaoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inspecao);
 
         setTitle("");
+        carregaNomeDoCheckList();
+        botaoProximo();
+    }
 
-
+    private void carregaNomeDoCheckList() {
         if (nomeInsp!=null) {
             carregaNomeInspecao();
         }else{
             nomeInsp = findViewById(R.id.nomeInsp);
             nomeInsp.setText("Check List Carro");
         }
-
-        botaoProximo();
     }
 
     private void botaoProximo() {
@@ -55,22 +56,19 @@ public class InspecaoActivity extends AppCompatActivity {
 
     public void responde() {
            indicePerguntaAtual++;
-           atualizaformulario();
-
+           atualizaformularioComPerguntaAtual();
     }
 
-    private void atualizaformulario() {
+    private void atualizaformularioComPerguntaAtual() {
         CarroDAO dao = new CarroDAO(InspecaoActivity.this);
-        List<Carro> carros = dao.buscaCarro();
+        List<Carro> carros = dao.buscaPergunta();
 
         perguntaAtual = carros.get(indicePerguntaAtual);
 
-        if(indicePerguntaAtual<20){
             campoPergunta = findViewById(R.id.pergunta);
-                campoPergunta.setText(perguntaAtual.getPergunta());
-        }else{
+            campoPergunta.setText(perguntaAtual.getPergunta());
+
             Toast.makeText(InspecaoActivity.this, "Não há perguntas!", Toast.LENGTH_SHORT).show();
-        }
     }
 
     private void carregaNomeInspecao() {

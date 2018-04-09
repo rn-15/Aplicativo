@@ -31,7 +31,7 @@ public class CarroDAO implements Closeable {
         dao.getWritableDatabase().insert("Carro", null, values);
     }
 
-    public List<Carro> buscaCarro() {
+    public List<Carro> buscaPergunta() {
         List<Carro> carros = new ArrayList<>();
         Cursor c = dao.getReadableDatabase().rawQuery("SELECT carro_pergunta FROM Carro", null);
         while (c.moveToNext())
