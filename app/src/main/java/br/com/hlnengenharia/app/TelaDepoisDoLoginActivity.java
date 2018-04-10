@@ -4,12 +4,16 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.ContextMenu;
+import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import br.com.hlnengenharia.app.cadastro.CadPerguntaActivity;
 import br.com.hlnengenharia.app.listas.ListaEmpresasActivity;
+import br.com.hlnengenharia.app.model.Carro;
 import br.com.hlnengenharia.app.model.Inspecao;
 import br.com.hlnengenharia.app.model.Usuario;
 
@@ -24,7 +28,6 @@ public class TelaDepoisDoLoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_tela_depois_do_login);
 
         pegaUsuarioLogado();
-
 
         carro = findViewById(R.id.carro);
         carro.setOnClickListener(new View.OnClickListener() {
@@ -56,6 +59,7 @@ public class TelaDepoisDoLoginActivity extends AppCompatActivity {
 
             }
         });
+        registerForContextMenu(carro);
     }
 
     private void pegaUsuarioLogado() {
@@ -65,5 +69,19 @@ public class TelaDepoisDoLoginActivity extends AppCompatActivity {
         nome_usuario.setText(usuario.getNome());
     }
 
-}
+    @Override
+    public void onCreateContextMenu(ContextMenu menu, View v, final ContextMenu.ContextMenuInfo menuInfo) {
+        super.onCreateContextMenu(menu, v, menuInfo);
+        MenuItem cadastrar = menu.add("Cadastrar pergunta");
+        cadastrar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+                Intent cadPergunta = new Intent(TelaDepoisDoLoginActivity.this, CadPerguntaActivity.class);
+                startActivity(cadPergunta);
 
+                return false;
+            }
+        });
+    }
+}
