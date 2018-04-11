@@ -46,4 +46,10 @@ public class CarroDAO implements Closeable {
         return carro;
     }
 
+    public void insereResposta(Carro carro) {
+        ContentValues values = new ContentValues();
+        values.put("carro_pergunta", carro.getPergunta());
+        values.put("carro_resposta", carro.getResposta());
+        dao.getWritableDatabase().insert("Carro", null, values);
+    }
 }
