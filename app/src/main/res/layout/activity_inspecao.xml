@@ -25,12 +25,12 @@
             <TextView
                 android:id="@+id/nomeInsp"
                 android:layout_width="match_parent"
-                android:layout_height="35dp"
+                android:layout_height="50dp"
                 android:background="#2da94a"
                 android:text="Nome da Inspeção"
                 android:gravity="center"
                 android:textColor="#fff"
-                android:textSize="22sp"
+                android:textSize="25sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -43,13 +43,14 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="Inserir pergunta"
+                android:gravity="center"
                 android:textColor="@android:color/black"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/nomeInsp"
-                app:layout_constraintVertical_bias="0.04000002" />
+                app:layout_constraintVertical_bias="0.19999999" />
 
 
             <RadioGroup
@@ -60,43 +61,44 @@
                 android:orientation="horizontal"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.28"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/pergunta"
-                app:layout_constraintVertical_bias="0.00999999">
+                app:layout_constraintVertical_bias="0.110000014">
 
                 <RadioButton
                     android:id="@+id/conforme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Conforme" />
+                    android:text="Conforme"
+                     />
 
                 <RadioButton
                     android:id="@+id/nConforme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Não conforme" />
+                    android:text="Não conforme"
+                    />
 
                 <RadioButton
                     android:id="@+id/nSeAplica"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="N/A" />
+                    android:text="N/A"
+                     />
             </RadioGroup>
 
             <Button
                 android:id="@+id/proximaPergunta"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
-                android:layout_marginRight="8dp"
                 android:background="@drawable/fundoretangulo"
                 android:text="Próxima"
                 android:textAllCaps="false"
                 android:textColor="#fff"
+                android:textSize="15sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
