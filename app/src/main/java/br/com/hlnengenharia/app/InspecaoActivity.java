@@ -56,11 +56,7 @@ public class InspecaoActivity extends AppCompatActivity {
                 CarroDAO dao = new CarroDAO(InspecaoActivity.this);
 
                 reconheceBotões(carro);
-                if(!c.isChecked() && !nc.isChecked() && !na.isChecked()){
-                    Toast.makeText(InspecaoActivity.this, "Preencha o formulário corretamente!", Toast.LENGTH_SHORT).show();
-                }else{
-                    dao.insereResposta(carro);
-                }
+                dao.insereResposta(carro);
                 responde();
             }
         });
