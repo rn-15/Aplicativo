@@ -31,12 +31,28 @@ public class InspecaoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_inspecao);
 
         setTitle("");
+
+
         carregaNomeDoCheckList();
+
+        atualizaFormularioComPerguntaAtual();
+        criarComponentes();
 
         botaoProximo();
 
 
     }
+
+    private void criarComponentes() {
+        nomeInsp = findViewById(R.id.nomeInsp);
+        campoPergunta = findViewById(R.id.pergunta);
+        proximaPergunta = findViewById(R.id.proximaPergunta);
+        c = findViewById(R.id.conforme);
+        nc = findViewById(R.id.nConforme);
+        na = findViewById(R.id.nSeAplica);
+        rg = findViewById(R.id.radioGroup);
+    }
+
 
     private void carregaNomeDoCheckList() {
         if (nomeInsp!=null) {
@@ -52,28 +68,26 @@ public class InspecaoActivity extends AppCompatActivity {
         proximaPergunta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Carro carro = new Carro();
-                CarroDAO dao = new CarroDAO(InspecaoActivity.this);
+              Carro carro = new Carro();
 
-                reconheceBotões(carro);
-                dao.insereResposta(carro);
+              if (!c.isChecked()&&!nc.isChecked()&&!na.isChecked()){
+                  Toast.makeText(InspecaoActivity.this, "Preencha os campos corretamente", Toast.LENGTH_SHORT).show();
+              }
+                if(c.isChecked()){
+                    carro.setResposta("Conforme");
+                }else if(nc.isChecked()){
+                    carro.setResposta("Não conforme");
+                }else{
+                    carro.setResposta("N/A");
+                }
+                carro.setPergunta(campoPergunta.getText().toString().trim());
+
                 responde();
+              CarroDAO dao = new CarroDAO(InspecaoActivity.this);
+              dao.insereResposta(carro);
+
             }
         });
-    }
-
-    private void reconheceBotões(Carro carro) {
-        c = findViewById(R.id.conforme);
-        nc = findViewById(R.id.nConforme);
-        na = findViewById(R.id.nSeAplica);
-        rg = findViewById(R.id.radioGroup);
-        campoPergunta = findViewById(R.id.pergunta);
-
-            carro.setPergunta(campoPergunta.getText().toString());
-            carro.setResposta(nc.getText().toString());
-            carro.setResposta(na.getText().toString());
-            carro.setResposta(c.getText().toString());
-
     }
 
     public void responde() {
