@@ -41,6 +41,8 @@ public class ListaCarrosActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent vaiParaInspecao = new Intent(ListaCarrosActivity.this, InspecaoActivity.class);
+                Carro carro = (Carro) listaCarros.getItemAtPosition(position);
+                vaiParaInspecao.putExtra("nome", carro);
                 startActivity(vaiParaInspecao);
             }
         });

@@ -57,8 +57,10 @@ public class InspecaoActivity extends AppCompatActivity {
         if (nomeInsp!=null) {
             carregaNomeInspecao();
         }else{
+            Intent intent = getIntent();
+            Carro carro = (Carro) intent.getSerializableExtra("nome");
             nomeInsp = findViewById(R.id.nomeInsp);
-            nomeInsp.setText("Check List Carro");
+            nomeInsp.setText(carro.getNome());
         }
     }
 
