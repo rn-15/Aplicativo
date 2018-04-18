@@ -34,7 +34,7 @@ public class CadPerguntaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_cad_pergunta);
 
         helper = new PerguntaHelper(CadPerguntaActivity.this);
-        helperC = new CarroHelper(CadPerguntaActivity.this);
+
 
         if (inspecao!=null) {
             Intent intent = getIntent();

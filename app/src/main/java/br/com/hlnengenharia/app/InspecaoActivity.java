@@ -80,7 +80,7 @@ public class InspecaoActivity extends AppCompatActivity {
                 }else{
                     resposta.setResposta("N/A");
                 }
-                carro.setPergunta(campoPergunta.getText().toString().trim());
+
               responde();
 
             }
@@ -93,16 +93,7 @@ public class InspecaoActivity extends AppCompatActivity {
     }
 
     private void atualizaFormularioComPerguntaAtual() {
-        CarroDAO dao = new CarroDAO(InspecaoActivity.this);
-        List<Carro> carros = dao.buscaPergunta();
-        if (indicePerguntaAtual < carros.size()) {
-            perguntaAtual = carros.get(indicePerguntaAtual);
-                campoPergunta = findViewById(R.id.pergunta);
-                campoPergunta.setText(perguntaAtual.getPergunta());
-        } else {
-            Toast.makeText(InspecaoActivity.this, "Não há perguntas!", Toast.LENGTH_SHORT).show();
-            finish();
-        }
+
     }
 
     private void carregaNomeInspecao() {

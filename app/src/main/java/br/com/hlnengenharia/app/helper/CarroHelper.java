@@ -16,7 +16,7 @@ public class CarroHelper {
     private final Carro carro;
 
     public CarroHelper(CadCarroActivity activity) {
-        campoCarro = activity.findViewById(R.id.pergunta);
+        campoCarro = activity.findViewById(R.id.carro_nome);
         carro = new Carro();
     }
 
