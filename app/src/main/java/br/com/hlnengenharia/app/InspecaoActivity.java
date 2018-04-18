@@ -15,10 +15,11 @@ import java.util.List;
 import br.com.hlnengenharia.app.dao.CarroDAO;
 import br.com.hlnengenharia.app.model.Carro;
 import br.com.hlnengenharia.app.model.Inspecao;
+import br.com.hlnengenharia.app.model.RespostaCarro;
 
 public class InspecaoActivity extends AppCompatActivity {
 
-    private TextView nomeInsp, campoPergunta;
+    private TextView nomeInsp, campoPergunta,campoId;
     private int indicePerguntaAtual = 0;
     private Button proximaPergunta;
     private Carro perguntaAtual;
@@ -32,14 +33,12 @@ public class InspecaoActivity extends AppCompatActivity {
 
         setTitle("");
 
-
         carregaNomeDoCheckList();
 
         atualizaFormularioComPerguntaAtual();
         criarComponentes();
 
         botaoProximo();
-
 
     }
 
@@ -69,22 +68,20 @@ public class InspecaoActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
               Carro carro = new Carro();
+                RespostaCarro resposta = new RespostaCarro();
 
               if (!c.isChecked()&&!nc.isChecked()&&!na.isChecked()){
                   Toast.makeText(InspecaoActivity.this, "Preencha os campos corretamente", Toast.LENGTH_SHORT).show();
               }
                 if(c.isChecked()){
-                    carro.setResposta("Conforme");
+                    resposta.setResposta("Conforme");
                 }else if(nc.isChecked()){
-                    carro.setResposta("Não conforme");
+                    resposta.setResposta("Não conforme");
                 }else{
-                    carro.setResposta("N/A");
+                    resposta.setResposta("N/A");
                 }
                 carro.setPergunta(campoPergunta.getText().toString().trim());
-
-                responde();
-              CarroDAO dao = new CarroDAO(InspecaoActivity.this);
-              dao.insereResposta(carro);
+              responde();
 
             }
         });
@@ -100,9 +97,8 @@ public class InspecaoActivity extends AppCompatActivity {
         List<Carro> carros = dao.buscaPergunta();
         if (indicePerguntaAtual < carros.size()) {
             perguntaAtual = carros.get(indicePerguntaAtual);
-
-            campoPergunta = findViewById(R.id.pergunta);
-            campoPergunta.setText(perguntaAtual.getPergunta());
+                campoPergunta = findViewById(R.id.pergunta);
+                campoPergunta.setText(perguntaAtual.getPergunta());
         } else {
             Toast.makeText(InspecaoActivity.this, "Não há perguntas!", Toast.LENGTH_SHORT).show();
             finish();

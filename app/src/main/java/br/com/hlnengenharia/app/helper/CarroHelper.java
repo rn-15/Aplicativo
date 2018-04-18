@@ -6,22 +6,23 @@ import android.widget.RadioGroup;
 
 import br.com.hlnengenharia.app.InspecaoActivity;
 import br.com.hlnengenharia.app.R;
+import br.com.hlnengenharia.app.cadastro.CadCarroActivity;
 import br.com.hlnengenharia.app.cadastro.CadPerguntaActivity;
 import br.com.hlnengenharia.app.model.Carro;
 
 public class CarroHelper {
 
-    private final EditText campoPergunta;
+    private final EditText campoCarro;
     private final Carro carro;
 
-    public CarroHelper(CadPerguntaActivity activity) {
-        campoPergunta = activity.findViewById(R.id.pergunta);
+    public CarroHelper(CadCarroActivity activity) {
+        campoCarro = activity.findViewById(R.id.pergunta);
         carro = new Carro();
     }
 
 
     public Carro pegaCarro() {
-        carro.setPergunta(campoPergunta.getText().toString());
+        carro.setNome(campoCarro.getText().toString());
         return carro;
     }
 }

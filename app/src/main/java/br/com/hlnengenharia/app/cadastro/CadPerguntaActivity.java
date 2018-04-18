@@ -57,12 +57,6 @@ public class CadPerguntaActivity extends AppCompatActivity {
                     dao.insereAltura(pergunta);
                     dao.close();
                     Toast.makeText(CadPerguntaActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
-                }else{
-                    CarroDAO dao = new CarroDAO(CadPerguntaActivity.this);
-                    Carro carro = helperC.pegaCarro();
-                    dao.insereCarro(carro);
-                    dao.close();
-                    finish();
                 }
 
                 finish();

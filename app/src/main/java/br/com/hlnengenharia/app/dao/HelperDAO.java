@@ -31,13 +31,20 @@ public class HelperDAO extends SQLiteOpenHelper {
                 "idEmpresa TEXT NOT NULL, FOREIGN KEY (idEmpresa) REFERENCES Empresas (empresa_id));";
         String setorSQL = "CREATE TABLE Setores(setor_id INTEGER PRIMARY KEY AUTOINCREMENT, setor_nome TEXT NOT NULL, " +
                 "setor_atividade TEXT, idUnidade TEXT NOT NULL, FOREIGN KEY (idUnidade) REFERENCES Unidades (unidade_id));";
+
         String inspecaoSQL = "CREATE TABLE Inspecoes (inspecao_id INTEGER PRIMARY KEY AUTOINCREMENT, inspecao_nome TEXT NOT NULL," +
                 "idSetor TEXT NOT NULL, FOREIGN KEY (idSetor) REFERENCES Setores (setor_id));";
-
         String perguntaSQL = "CREATE TABLE Perguntas (pergunta_id INTEGER PRIMARY KEY AUTOINCREMENT, pergunta_desc TEXT NOT NULL, " +
                 "idInspecao TEXT NOT NULL, FOREIGN KEY (idInspecao) REFERENCES Inspecoes (inspecao_id));";
 
-        String carroSQL = "CREATE TABLE Carro (carro_id INTEGER PRIMARY KEY AUTOINCREMENT, carro_pergunta TEXT NOT NULL, carro_resposta TEXT);";
+        String carroSQL = "CREATE TABLE Carro (carro_id INTEGER PRIMARY KEY, carro_nome TEXT NOT NULL);";
+        String carroPerguntaSQL = "CREATE TABLE CarroPergunta (cpergunta_id INTEGER PRIMARY KEY, cpergunta TEXT NOT NULL);";
+        String carroRespostaSQL = "CREATE TABLE CarroResposta (cresposta_id INTEGER PRIMARY KEY," +
+                "idCarro INTEGER REFERENCES Carro(carro_id)," +
+                "idPergunta INTEGER REFERENCES CarroPergunta(cpergunta_id)," +
+                "cresposta_desc TEXT);";
+
+
 
         db.execSQL(userSQL);
         db.execSQL(empresaSQL);
@@ -48,6 +55,8 @@ public class HelperDAO extends SQLiteOpenHelper {
         db.execSQL(perguntaSQL);
 
         db.execSQL(carroSQL);
+        db.execSQL(carroPerguntaSQL);
+        db.execSQL(carroRespostaSQL);
 
     }
 
@@ -62,6 +71,8 @@ public class HelperDAO extends SQLiteOpenHelper {
         String perguntaSQL = "DROP TABLE IF EXISTS Perguntas;";
 
         String carroSQL = "DROP TABLE IF EXISTS Carro";
+        String carroPerguntaSQL = "DROP TABLE IF EXISTS CarroPergunta;";
+        String carroRespostaSQL = "DROP TABLE IF EXISTS CarroResposta;";
 
         db.execSQL(userSQL);
         db.execSQL(empresaSQL);
@@ -72,6 +83,8 @@ public class HelperDAO extends SQLiteOpenHelper {
         db.execSQL(perguntaSQL);
 
         db.execSQL(carroSQL);
+        db.execSQL(carroPerguntaSQL);
+        db.execSQL(carroRespostaSQL);
 
         onCreate(db);
     }

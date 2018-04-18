@@ -31,7 +31,9 @@
         <activity
             android:name=".InspecaoActivity"
             android:label="@string/title_activity_inspecao"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".listas.ListaCarrosActivity" />
+        <activity android:name=".cadastro.CadCarroActivity"></activity>
     </application>
 
 </manifest>

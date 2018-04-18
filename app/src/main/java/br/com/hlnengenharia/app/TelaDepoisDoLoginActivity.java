@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import br.com.hlnengenharia.app.cadastro.CadPerguntaActivity;
+import br.com.hlnengenharia.app.listas.ListaCarrosActivity;
 import br.com.hlnengenharia.app.listas.ListaEmpresasActivity;
 import br.com.hlnengenharia.app.model.Carro;
 import br.com.hlnengenharia.app.model.Inspecao;
@@ -33,7 +34,7 @@ public class TelaDepoisDoLoginActivity extends AppCompatActivity {
         carro.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(TelaDepoisDoLoginActivity.this, InspecaoActivity.class);
+                Intent intent = new Intent(TelaDepoisDoLoginActivity.this, ListaCarrosActivity.class);
                 startActivity(intent);
             }
         });
