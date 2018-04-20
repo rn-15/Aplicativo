@@ -13,8 +13,10 @@ import android.widget.Toast;
 import java.util.List;
 
 import br.com.hlnengenharia.app.dao.CarroDAO;
+import br.com.hlnengenharia.app.dao.pCarroDAO;
 import br.com.hlnengenharia.app.model.Carro;
 import br.com.hlnengenharia.app.model.Inspecao;
+import br.com.hlnengenharia.app.model.PerguntaCarro;
 import br.com.hlnengenharia.app.model.RespostaCarro;
 
 public class InspecaoActivity extends AppCompatActivity {
@@ -22,7 +24,7 @@ public class InspecaoActivity extends AppCompatActivity {
     private TextView nomeInsp, campoPergunta,campoId;
     private int indicePerguntaAtual = 0;
     private Button proximaPergunta;
-    private Carro perguntaAtual;
+    private PerguntaCarro perguntaAtual;
     private RadioButton c,nc,na;
     private RadioGroup rg;
 
@@ -34,12 +36,28 @@ public class InspecaoActivity extends AppCompatActivity {
         setTitle("");
 
         carregaNomeDoCheckList();
-
-        atualizaFormularioComPerguntaAtual();
         criarComponentes();
 
         botaoProximo();
+        responde();
 
+        atualizaFormularioComPerguntaAtual();
+
+
+    }
+
+    private void atualizaFormularioComPerguntaAtual() {
+        pCarroDAO dao = new pCarroDAO(InspecaoActivity.this);
+        List<PerguntaCarro> perguntas = dao.buscaPerguntaCarro();
+        if(indicePerguntaAtual<perguntas.size())
+            perguntaAtual = perguntas.get(indicePerguntaAtual);
+        campoPergunta = findViewById(R.id.pergunta);
+        campoPergunta.setText(perguntaAtual.getPergunta());
+    }
+
+    public void responde(){
+        indicePerguntaAtual++;
+        atualizaFormularioComPerguntaAtual();
     }
 
     private void criarComponentes() {
@@ -56,12 +74,16 @@ public class InspecaoActivity extends AppCompatActivity {
     private void carregaNomeDoCheckList() {
         if (nomeInsp!=null) {
             carregaNomeInspecao();
-        }else{
-            Intent intent = getIntent();
-            Carro carro = (Carro) intent.getSerializableExtra("nome");
-            nomeInsp = findViewById(R.id.nomeInsp);
-            nomeInsp.setText(carro.getNome());
-        }
+        }//else{
+         //   Intent intent = getIntent();
+        //    Carro carro = (Carro) intent.getSerializableExtra("carro_id");
+        //    PerguntaCarro perguntaCarro = (PerguntaCarro) intent.getSerializableExtra("cpergunta_id");
+         //   nomeInsp = findViewById(R.id.nomeInsp);
+         //   nomeInsp.setText(carro.getId().toString());
+         //   campoId = findViewById(R.id.idCarro);
+          //  campoId.setText(perguntaCarro.getId().toString());
+
+     //   }
     }
 
     private void botaoProximo() {
@@ -69,9 +91,9 @@ public class InspecaoActivity extends AppCompatActivity {
         proximaPergunta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              Carro carro = new Carro();
-                RespostaCarro resposta = new RespostaCarro();
 
+           RespostaCarro resposta = new RespostaCarro();
+           pCarroDAO dao = new pCarroDAO(InspecaoActivity.this);
               if (!c.isChecked()&&!nc.isChecked()&&!na.isChecked()){
                   Toast.makeText(InspecaoActivity.this, "Preencha os campos corretamente", Toast.LENGTH_SHORT).show();
               }
@@ -83,19 +105,9 @@ public class InspecaoActivity extends AppCompatActivity {
                     resposta.setResposta("N/A");
                 }
 
-              responde();
-
+            dao.inserir(resposta);
             }
         });
-    }
-
-    public void responde() {
-        indicePerguntaAtual++;
-        atualizaFormularioComPerguntaAtual();
-    }
-
-    private void atualizaFormularioComPerguntaAtual() {
-
     }
 
     private void carregaNomeInspecao() {

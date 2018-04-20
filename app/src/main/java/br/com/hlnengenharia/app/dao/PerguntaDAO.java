@@ -26,20 +26,12 @@ public class PerguntaDAO implements Closeable {
         dao.close();
     }
 
-    public void insereAltura(Pergunta pergunta) {
-        ContentValues values = new ContentValues();
 
-        values.put("idInspecao", pergunta.getIdInspecao());
-        values.put("altura_pergunta", pergunta.getPergunta());
 
-        dao.getWritableDatabase().insert("Altura", null, values);
-
-    }
-
-    public List<Pergunta> buscaPerguntaAltura(Long idInsp){
+    public List<Pergunta> buscaPergunta(){
         List<Pergunta> perguntas = new ArrayList<>();
 
-        Cursor c = dao.getReadableDatabase().rawQuery("SELECT * FROM Altura JOIN Inspecoes ON idInspecao=inspencao_id WHERE idInspecao=?", new String[]{idInsp.toString()});
+        Cursor c = dao.getReadableDatabase().rawQuery("SELECT * FROM Altura", null);
 
         while (c.moveToNext())
             perguntas.add(criaPergunta(c));

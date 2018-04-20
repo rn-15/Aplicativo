@@ -54,4 +54,5 @@ public class CarroDAO implements Closeable {
     public void deleta(Carro carro) {
         dao.getWritableDatabase().delete("Carro", "carro_id=?", new String[]{carro.getId().toString()});
     }
+
 }

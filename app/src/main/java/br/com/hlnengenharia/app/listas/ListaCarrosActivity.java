@@ -20,11 +20,13 @@ import br.com.hlnengenharia.app.R;
 import br.com.hlnengenharia.app.cadastro.CadCarroActivity;
 import br.com.hlnengenharia.app.dao.CarroDAO;
 import br.com.hlnengenharia.app.model.Carro;
+import br.com.hlnengenharia.app.model.PerguntaCarro;
 
 public class ListaCarrosActivity extends AppCompatActivity {
-
+    public static final String NOME_APPBAR = "Carros cadastrados";
     private ListView listaCarros;
     private Button novoCarro;
+    private PerguntaCarro pergunta;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +35,7 @@ public class ListaCarrosActivity extends AppCompatActivity {
         listaCarros = findViewById(R.id.lista_carros);
         registerForContextMenu(listaCarros);
 
-        setTitle("");
+        setTitle(NOME_APPBAR);
         vaiParaCadCarros();
         carregaListaCarros();
 
@@ -41,8 +43,9 @@ public class ListaCarrosActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
                 Intent vaiParaInspecao = new Intent(ListaCarrosActivity.this, InspecaoActivity.class);
-                Carro carro = (Carro) listaCarros.getItemAtPosition(position);
-                vaiParaInspecao.putExtra("nome", carro);
+              //  Carro carro = (Carro) listaCarros.getItemAtPosition(position);
+             //   vaiParaInspecao.putExtra("carro_id", carro);
+             //   vaiParaInspecao.putExtra("cpergunta_id", pergunta);
                 startActivity(vaiParaInspecao);
             }
         });

@@ -5,6 +5,7 @@ import java.io.Serializable;
 public class RespostaCarro implements Serializable {
     private Long id;
     private Long idCarro;
+    private Long idPergunta;
     private String resposta;
 
     public Long getId() {
@@ -21,6 +22,14 @@ public class RespostaCarro implements Serializable {
 
     public void setIdCarro(Long idCarro) {
         this.idCarro = idCarro;
+    }
+
+    public Long getIdPergunta() {
+        return idPergunta;
+    }
+
+    public void setIdPergunta(Long idPergunta) {
+        this.idPergunta = idPergunta;
     }
 
     public String getResposta() {

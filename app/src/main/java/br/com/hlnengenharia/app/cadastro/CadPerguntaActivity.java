@@ -12,18 +12,21 @@ import android.widget.Toast;
 import br.com.hlnengenharia.app.R;
 import br.com.hlnengenharia.app.dao.CarroDAO;
 import br.com.hlnengenharia.app.dao.PerguntaDAO;
+import br.com.hlnengenharia.app.dao.pCarroDAO;
 import br.com.hlnengenharia.app.helper.CarroHelper;
+import br.com.hlnengenharia.app.helper.PerguntaCarroHelper;
 import br.com.hlnengenharia.app.helper.PerguntaHelper;
 import br.com.hlnengenharia.app.model.Carro;
 import br.com.hlnengenharia.app.model.Inspecao;
 import br.com.hlnengenharia.app.model.Pergunta;
+import br.com.hlnengenharia.app.model.PerguntaCarro;
 
 public class CadPerguntaActivity extends AppCompatActivity {
 
     Button salvar;
     EditText pergunta;
     TextView codigo, setor, nome;
-    private PerguntaHelper helper;
+    private PerguntaCarroHelper helper;
     private CarroHelper helperC;
     private Inspecao inspecao;
 
@@ -33,8 +36,7 @@ public class CadPerguntaActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_cad_pergunta);
 
-        helper = new PerguntaHelper(CadPerguntaActivity.this);
-
+        helper = new PerguntaCarroHelper(CadPerguntaActivity.this);
 
         if (inspecao!=null) {
             Intent intent = getIntent();
@@ -51,13 +53,13 @@ public class CadPerguntaActivity extends AppCompatActivity {
         salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (inspecao!=null) {
-                    PerguntaDAO dao = new PerguntaDAO(CadPerguntaActivity.this);
-                    Pergunta pergunta = helper.pegaPergunta();
-                    dao.insereAltura(pergunta);
+
+                    pCarroDAO dao = new pCarroDAO(CadPerguntaActivity.this);
+                    PerguntaCarro perguntaCarro = helper.pegaPergunta();
+                    dao.insere(perguntaCarro);
                     dao.close();
                     Toast.makeText(CadPerguntaActivity.this, "Salvo com sucesso", Toast.LENGTH_SHORT).show();
-                }
+
 
                 finish();
             }

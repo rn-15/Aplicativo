@@ -28,6 +28,7 @@
                 android:id="@+id/idCarro"
                 android:visibility="invisible"/>
 
+
             <TextView
                 android:id="@+id/nomeInsp"
                 android:layout_width="match_parent"
