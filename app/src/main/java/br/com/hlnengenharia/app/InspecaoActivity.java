@@ -38,83 +38,68 @@ public class InspecaoActivity extends AppCompatActivity {
         carregaNomeDoCheckList();
         criarComponentes();
 
-        botaoProximo();
-        responde();
 
         atualizaFormularioComPerguntaAtual();
 
-
-    }
-
-    private void atualizaFormularioComPerguntaAtual() {
-        pCarroDAO dao = new pCarroDAO(InspecaoActivity.this);
-        List<PerguntaCarro> perguntas = dao.buscaPerguntaCarro();
-        if(indicePerguntaAtual<perguntas.size())
-            perguntaAtual = perguntas.get(indicePerguntaAtual);
-        campoPergunta = findViewById(R.id.pergunta);
-        campoPergunta.setText(perguntaAtual.getPergunta());
-    }
-
-    public void responde(){
-        indicePerguntaAtual++;
-        atualizaFormularioComPerguntaAtual();
-    }
-
-    private void criarComponentes() {
-        nomeInsp = findViewById(R.id.nomeInsp);
-        campoPergunta = findViewById(R.id.pergunta);
-        proximaPergunta = findViewById(R.id.proximaPergunta);
-        c = findViewById(R.id.conforme);
-        nc = findViewById(R.id.nConforme);
-        na = findViewById(R.id.nSeAplica);
-        rg = findViewById(R.id.radioGroup);
-    }
-
-
-    private void carregaNomeDoCheckList() {
-        if (nomeInsp!=null) {
-            carregaNomeInspecao();
-        }//else{
-         //   Intent intent = getIntent();
-        //    Carro carro = (Carro) intent.getSerializableExtra("carro_id");
-        //    PerguntaCarro perguntaCarro = (PerguntaCarro) intent.getSerializableExtra("cpergunta_id");
-         //   nomeInsp = findViewById(R.id.nomeInsp);
-         //   nomeInsp.setText(carro.getId().toString());
-         //   campoId = findViewById(R.id.idCarro);
-          //  campoId.setText(perguntaCarro.getId().toString());
-
-     //   }
-    }
-
-    private void botaoProximo() {
         proximaPergunta = findViewById(R.id.proximaPergunta);
         proximaPergunta.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-
-           RespostaCarro resposta = new RespostaCarro();
-           pCarroDAO dao = new pCarroDAO(InspecaoActivity.this);
-              if (!c.isChecked()&&!nc.isChecked()&&!na.isChecked()){
-                  Toast.makeText(InspecaoActivity.this, "Preencha os campos corretamente", Toast.LENGTH_SHORT).show();
-              }
-                if(c.isChecked()){
-                    resposta.setResposta("Conforme");
-                }else if(nc.isChecked()){
-                    resposta.setResposta("Não conforme");
-                }else{
-                    resposta.setResposta("N/A");
-                }
-
-            dao.inserir(resposta);
+            public void onClick(View view) {
+                responde();
             }
         });
     }
 
-    private void carregaNomeInspecao() {
-        Intent intent = getIntent();
-        Inspecao inspecao = (Inspecao) intent.getSerializableExtra("nome");
-        nomeInsp = findViewById(R.id.nomeInsp);
-        nomeInsp.setText(inspecao.getNome());
+    private void atualizaFormularioComPerguntaAtual() {
+        RespostaCarro resposta = new RespostaCarro();
+        pCarroDAO dao = new pCarroDAO(InspecaoActivity.this);
+        List<PerguntaCarro> perguntas = dao.buscaPerguntaCarro();
+
+        if (indicePerguntaAtual < perguntas.size()){
+            perguntaAtual = perguntas.get(indicePerguntaAtual);
+
+        campoPergunta = findViewById(R.id.pergunta);
+        campoPergunta.setText(perguntaAtual.getPergunta());
+
+        dao.inserir(resposta);
+        }else{
+            finish();
+        }
     }
 
-}
+
+    public void responde() {
+        indicePerguntaAtual++;
+        atualizaFormularioComPerguntaAtual();
+    }
+
+            private void criarComponentes() {
+                nomeInsp = findViewById(R.id.nomeInsp);
+                campoPergunta = findViewById(R.id.pergunta);
+                proximaPergunta = findViewById(R.id.proximaPergunta);
+                c = findViewById(R.id.conforme);
+                nc = findViewById(R.id.nConforme);
+                na = findViewById(R.id.nSeAplica);
+                rg = findViewById(R.id.radioGroup);
+            }
+
+
+            private void carregaNomeDoCheckList() {
+                if (nomeInsp != null) {
+                    carregaNomeInspecao();
+                } else {
+                    Intent intent = getIntent();
+                    Carro carro = (Carro) intent.getSerializableExtra("carro");
+                    nomeInsp = findViewById(R.id.nomeInsp);
+                    nomeInsp.setText(carro.getNome());
+                }
+            }
+
+
+            private void carregaNomeInspecao() {
+                Intent intent = getIntent();
+                Inspecao inspecao = (Inspecao) intent.getSerializableExtra("nome");
+                nomeInsp = findViewById(R.id.nomeInsp);
+                nomeInsp.setText(inspecao.getNome());
+            }
+        }

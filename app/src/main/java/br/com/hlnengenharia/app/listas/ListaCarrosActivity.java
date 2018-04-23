@@ -42,11 +42,10 @@ public class ListaCarrosActivity extends AppCompatActivity {
         listaCarros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-                Intent vaiParaInspecao = new Intent(ListaCarrosActivity.this, InspecaoActivity.class);
-              //  Carro carro = (Carro) listaCarros.getItemAtPosition(position);
-             //   vaiParaInspecao.putExtra("carro_id", carro);
-             //   vaiParaInspecao.putExtra("cpergunta_id", pergunta);
-                startActivity(vaiParaInspecao);
+               Intent vaiParaInspecao = new Intent(ListaCarrosActivity.this, InspecaoActivity.class);
+               Carro carro = (Carro) listaCarros.getItemAtPosition(position);
+               vaiParaInspecao.putExtra("carro", carro);
+               startActivity(vaiParaInspecao);
             }
         });
     }
