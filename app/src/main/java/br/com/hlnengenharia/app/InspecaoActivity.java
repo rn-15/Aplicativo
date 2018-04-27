@@ -21,7 +21,7 @@ import br.com.hlnengenharia.app.model.RespostaCarro;
 
 public class InspecaoActivity extends AppCompatActivity {
 
-    private TextView nomeInsp, campoPergunta,campoId;
+    private TextView nomeInsp, campoPergunta,idCarro,idPergunta;
     private int indicePerguntaAtual = 0;
     private Button proximaPergunta;
     private PerguntaCarro perguntaAtual;
@@ -37,69 +37,86 @@ public class InspecaoActivity extends AppCompatActivity {
 
         carregaNomeDoCheckList();
         criarComponentes();
-
-
+        botaoProximo();
         atualizaFormularioComPerguntaAtual();
 
+
+    }
+
+    private void botaoProximo() {
         proximaPergunta = findViewById(R.id.proximaPergunta);
         proximaPergunta.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                indicePerguntaAtual++;
                 responde();
             }
         });
     }
 
     private void atualizaFormularioComPerguntaAtual() {
-        RespostaCarro resposta = new RespostaCarro();
+
         pCarroDAO dao = new pCarroDAO(InspecaoActivity.this);
         List<PerguntaCarro> perguntas = dao.buscaPerguntaCarro();
 
-        if (indicePerguntaAtual < perguntas.size()){
+        if (indicePerguntaAtual < perguntas.size()) {
+
             perguntaAtual = perguntas.get(indicePerguntaAtual);
 
-        campoPergunta = findViewById(R.id.pergunta);
-        campoPergunta.setText(perguntaAtual.getPergunta());
+            campoPergunta.setText(perguntaAtual.getPergunta());
+            idPergunta.setText(perguntaAtual.getId().toString());
 
-        dao.inserir(resposta);
         }else{
             finish();
         }
+
     }
 
-
     public void responde() {
-        indicePerguntaAtual++;
+        RespostaCarro resposta = new RespostaCarro();
+        pCarroDAO dao = new pCarroDAO(InspecaoActivity.this);
+        resposta.setIdCarro(Long.valueOf(idCarro.getText().toString()));
+        resposta.setIdPergunta(Long.valueOf(idPergunta.getText().toString()));
+
+        if (c.isChecked()) {
+            resposta.setResposta(c.getText().toString());
+        } else if (nc.isChecked()) {
+            resposta.setResposta(nc.getText().toString());
+        } else {
+            resposta.setResposta(na.getText().toString());
+        }
+        dao.inserir(resposta);
         atualizaFormularioComPerguntaAtual();
     }
 
-            private void criarComponentes() {
-                nomeInsp = findViewById(R.id.nomeInsp);
-                campoPergunta = findViewById(R.id.pergunta);
-                proximaPergunta = findViewById(R.id.proximaPergunta);
-                c = findViewById(R.id.conforme);
-                nc = findViewById(R.id.nConforme);
-                na = findViewById(R.id.nSeAplica);
-                rg = findViewById(R.id.radioGroup);
-            }
+
+    private void criarComponentes() {
+        idCarro = findViewById(R.id.idCarro);
+        idPergunta = findViewById(R.id.idPergunta);
+        nomeInsp = findViewById(R.id.nomeInsp);
+        campoPergunta = findViewById(R.id.pergunta);
+        proximaPergunta = findViewById(R.id.proximaPergunta);
+        campoPergunta = findViewById(R.id.pergunta);
+        c = findViewById(R.id.conforme);
+        nc = findViewById(R.id.nConforme);
+        na = findViewById(R.id.nSeAplica);
+        rg = findViewById(R.id.radioGroup);
+    }
 
 
-            private void carregaNomeDoCheckList() {
-                if (nomeInsp != null) {
-                    carregaNomeInspecao();
-                } else {
-                    Intent intent = getIntent();
-                    Carro carro = (Carro) intent.getSerializableExtra("carro");
-                    nomeInsp = findViewById(R.id.nomeInsp);
-                    nomeInsp.setText(carro.getNome());
-                }
-            }
-
-
-            private void carregaNomeInspecao() {
-                Intent intent = getIntent();
-                Inspecao inspecao = (Inspecao) intent.getSerializableExtra("nome");
-                nomeInsp = findViewById(R.id.nomeInsp);
-                nomeInsp.setText(inspecao.getNome());
-            }
+    private void carregaNomeDoCheckList() {
+        if (nomeInsp != null) {
+            Intent intent = getIntent();
+            Inspecao inspecao = (Inspecao) intent.getSerializableExtra("nome");
+            nomeInsp = findViewById(R.id.nomeInsp);
+            nomeInsp.setText(inspecao.getNome());
+        } else {
+            Intent intent = getIntent();
+            Carro carro = (Carro) intent.getSerializableExtra("carro");
+            nomeInsp = findViewById(R.id.nomeInsp);
+            nomeInsp.setText(carro.getNome());
+            idCarro = findViewById(R.id.idCarro);
+            idCarro.setText(carro.getId().toString());
         }
+    }
+}

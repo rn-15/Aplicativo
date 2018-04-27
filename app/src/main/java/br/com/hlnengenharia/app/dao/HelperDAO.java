@@ -13,7 +13,7 @@ public class HelperDAO extends SQLiteOpenHelper {
 
 
     private static final String NOME = "BD_APLICATIVO";
-    private static final int VERSAO = 15;
+    private static final int VERSAO = 16;
 
     public HelperDAO(Context context) {
         super(context, NOME, null, VERSAO);
