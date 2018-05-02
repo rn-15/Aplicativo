@@ -42,10 +42,10 @@ public class ListaCarrosActivity extends AppCompatActivity {
         listaCarros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int position, long l) {
-               Intent vaiParaInspecao = new Intent(ListaCarrosActivity.this, InspecaoActivity.class);
+               Intent vaiParaInspecaoRealizada = new Intent(ListaCarrosActivity.this, ListaInspecoesActivity.class);
                Carro carro = (Carro) listaCarros.getItemAtPosition(position);
-               vaiParaInspecao.putExtra("carro", carro);
-               startActivity(vaiParaInspecao);
+               vaiParaInspecaoRealizada.putExtra("carro", carro);
+               startActivity(vaiParaInspecaoRealizada);
             }
         });
     }
@@ -68,6 +68,21 @@ public class ListaCarrosActivity extends AppCompatActivity {
                 carregaListaCarros();
 
                 Toast.makeText(ListaCarrosActivity.this,  carro.getNome()+" deletado!", Toast.LENGTH_SHORT).show();
+                return false;
+            }
+        });
+        MenuItem visualizar = menu.add("Visualizar Inspeções");
+        visualizar.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem item) {
+                AdapterView.AdapterContextMenuInfo info = (AdapterView.AdapterContextMenuInfo) menuInfo;
+
+               // PRECISO PUXAR TODAS INSPEÇOES FEITAS PRAQUELE CARRO
+               // COLOCAR DATA NAS INSPEÇOES
+                //COLOCAR KM NO FORMULARIO
+              //  COLOCAR PRA PUXAR QUAL USUARIO ESTA FAZENDO A INSPEÇÃO
+            //    VISUALIZAR SEM ALTERAR A INSPEÇÃO
+          //      COLOCAR CAMPOO DE OBSERVAÇÃO
                 return false;
             }
         });
@@ -98,4 +113,6 @@ public class ListaCarrosActivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

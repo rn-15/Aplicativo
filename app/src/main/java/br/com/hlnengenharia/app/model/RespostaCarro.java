@@ -7,6 +7,15 @@ public class RespostaCarro implements Serializable {
     private Long idCarro;
     private Long idPergunta;
     private String resposta;
+    private String data;
+
+    public String getData() {
+        return data;
+    }
+
+    public void setData(String data) {
+        this.data = data;
+    }
 
     public Long getId() {
         return id;
@@ -38,5 +47,10 @@ public class RespostaCarro implements Serializable {
 
     public void setResposta(String resposta) {
         this.resposta = resposta;
+    }
+
+    @Override
+    public String toString() {
+        return getResposta();
     }
 }

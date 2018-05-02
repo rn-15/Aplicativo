@@ -123,6 +123,7 @@ public class ListaUnidadesActivity extends AppCompatActivity {
         Long idEmp = empresa.getId();
 
         List<Unidade> unidades = dao.buscaUnidades(idEmp);
+
         dao.close();
         ArrayAdapter<Unidade> adapter = new ArrayAdapter<Unidade>(this, android.R.layout.simple_list_item_1, unidades);
         listaUnidades = findViewById(R.id.lista_unidades);

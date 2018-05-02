@@ -40,7 +40,6 @@ public class InspecaoActivity extends AppCompatActivity {
         botaoProximo();
         atualizaFormularioComPerguntaAtual();
 
-
     }
 
     private void botaoProximo() {

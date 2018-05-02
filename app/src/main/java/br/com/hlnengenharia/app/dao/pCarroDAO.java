@@ -3,6 +3,7 @@ package br.com.hlnengenharia.app.dao;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.support.annotation.NonNull;
 
 import java.io.Closeable;
 import java.io.IOException;
@@ -52,5 +53,24 @@ public class pCarroDAO implements Closeable {
             values.put("idPergunta", resposta.getIdPergunta());
             values.put("cresposta_desc", resposta.getResposta());
         dao.getWritableDatabase().insert("CarroResposta", null, values);
+    }
+
+    public List<RespostaCarro> buscaResposta() {
+        List<RespostaCarro> respostas = new ArrayList<>();
+        Cursor c = dao.getReadableDatabase().rawQuery("SELECT * FROM CarroResposta",null);
+        while (c.moveToNext()){
+            respostas.add(criaResposta(c));
+        }c.close();
+        return respostas;
+    }
+
+    @NonNull
+    private RespostaCarro criaResposta(Cursor c) {
+        RespostaCarro r = new RespostaCarro();
+        r.setId(c.getLong(c.getColumnIndex("cresposta_id")));
+        r.setIdCarro(c.getLong(c.getColumnIndex("idCarro")));
+        r.setIdPergunta(c.getLong(c.getColumnIndex("idPergunta")));
+        r.setResposta(c.getString(c.getColumnIndex("cresposta_desc")));
+        return r;
     }
 }
