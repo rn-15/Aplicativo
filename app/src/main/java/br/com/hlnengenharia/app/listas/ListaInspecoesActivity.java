@@ -60,8 +60,6 @@ public class ListaInspecoesActivity extends AppCompatActivity {
     private void carregaListaInspecoes() {
         pCarroDAO dao = new pCarroDAO(ListaInspecoesActivity.this);
 
-
-
         List<RespostaCarro> respostaCarros = dao.buscaResposta();
         dao.close();
         listaRespostas = findViewById(R.id.lista_insp);

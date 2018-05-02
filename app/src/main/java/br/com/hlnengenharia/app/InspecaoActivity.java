@@ -3,21 +3,22 @@ package br.com.hlnengenharia.app;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
-import br.com.hlnengenharia.app.dao.CarroDAO;
+import br.com.hlnengenharia.app.cadastro.CadDataKmActivity;
 import br.com.hlnengenharia.app.dao.pCarroDAO;
 import br.com.hlnengenharia.app.model.Carro;
 import br.com.hlnengenharia.app.model.Inspecao;
 import br.com.hlnengenharia.app.model.PerguntaCarro;
 import br.com.hlnengenharia.app.model.RespostaCarro;
+
 
 public class InspecaoActivity extends AppCompatActivity {
 
@@ -66,7 +67,8 @@ public class InspecaoActivity extends AppCompatActivity {
             idPergunta.setText(perguntaAtual.getId().toString());
 
         }else{
-            finish();
+            Intent intent = new Intent(InspecaoActivity.this, CadDataKmActivity.class);
+            startActivity(intent);
         }
 
     }

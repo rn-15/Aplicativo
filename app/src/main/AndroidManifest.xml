@@ -34,7 +34,8 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".listas.ListaCarrosActivity" />
         <activity android:name=".cadastro.CadCarroActivity" />
-        <activity android:name=".listas.ListaInspecoesActivity"></activity>
+        <activity android:name=".listas.ListaInspecoesActivity" />
+        <activity android:name=".cadastro.CadDataKmActivity"></activity>
     </application>
 
 </manifest>
