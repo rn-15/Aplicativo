@@ -1,15 +1,19 @@
 package br.com.hlnengenharia.app;
 
+import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.List;
 
 import br.com.hlnengenharia.app.cadastro.CadDataKmActivity;
@@ -66,9 +70,11 @@ public class InspecaoActivity extends AppCompatActivity {
             campoPergunta.setText(perguntaAtual.getPergunta());
             idPergunta.setText(perguntaAtual.getId().toString());
 
-        }else{
+        }else if(idPergunta!=null){
             Intent intent = new Intent(InspecaoActivity.this, CadDataKmActivity.class);
             startActivity(intent);
+        }else{
+            Toast.makeText(this, "Não há perguntas", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -76,18 +82,20 @@ public class InspecaoActivity extends AppCompatActivity {
     public void responde() {
         RespostaCarro resposta = new RespostaCarro();
         pCarroDAO dao = new pCarroDAO(InspecaoActivity.this);
-        resposta.setIdCarro(Long.valueOf(idCarro.getText().toString()));
-        resposta.setIdPergunta(Long.valueOf(idPergunta.getText().toString()));
 
-        if (c.isChecked()) {
-            resposta.setResposta(c.getText().toString());
-        } else if (nc.isChecked()) {
-            resposta.setResposta(nc.getText().toString());
-        } else {
-            resposta.setResposta(na.getText().toString());
-        }
-        dao.inserir(resposta);
-        atualizaFormularioComPerguntaAtual();
+            resposta.setIdCarro(Long.valueOf(idCarro.getText().toString()));
+            resposta.setIdPergunta(Long.valueOf(idPergunta.getText().toString()));
+
+            if (c.isChecked()) {
+                resposta.setResposta(c.getText().toString());
+            } else if (nc.isChecked()) {
+                resposta.setResposta(nc.getText().toString());
+            } else {
+                resposta.setResposta(na.getText().toString());
+            }
+            dao.inserir(resposta);
+            atualizaFormularioComPerguntaAtual();
+
     }
 
 

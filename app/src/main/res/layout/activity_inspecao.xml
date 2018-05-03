@@ -102,6 +102,18 @@
                      />
             </RadioGroup>
 
+            <EditText
+                android:id="@+id/observacao"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:hint="Observações"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/radioGroup"
+                app:layout_constraintVertical_bias="0.17000002" />
+
             <Button
                 android:id="@+id/proximaPergunta"
                 android:layout_width="wrap_content"
@@ -115,7 +127,8 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/pergunta" />
+                app:layout_constraintTop_toBottomOf="@+id/observacao"
+                app:layout_constraintVertical_bias="0.23000002" />
         </android.support.constraint.ConstraintLayout>
     </android.support.v7.widget.CardView>
 </android.support.constraint.ConstraintLayout>

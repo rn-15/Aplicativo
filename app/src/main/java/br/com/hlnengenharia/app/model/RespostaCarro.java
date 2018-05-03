@@ -8,6 +8,15 @@ public class RespostaCarro implements Serializable {
     private Long idPergunta;
     private String resposta;
     private String data;
+    private String hora;
+
+    public String getHora() {
+        return hora;
+    }
+
+    public void setHora(String hora) {
+        this.hora = hora;
+    }
 
     public String getData() {
         return data;

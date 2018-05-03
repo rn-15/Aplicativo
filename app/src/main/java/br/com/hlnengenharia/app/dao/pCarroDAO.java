@@ -52,6 +52,8 @@ public class pCarroDAO implements Closeable {
             values.put("idCarro", resposta.getIdCarro());
             values.put("idPergunta", resposta.getIdPergunta());
             values.put("cresposta_desc", resposta.getResposta());
+            values.put("cdata", resposta.getData());
+            values.put("chora", resposta.getHora());
         dao.getWritableDatabase().insert("CarroResposta", null, values);
     }
 
@@ -73,4 +75,5 @@ public class pCarroDAO implements Closeable {
         r.setResposta(c.getString(c.getColumnIndex("cresposta_desc")));
         return r;
     }
+
 }

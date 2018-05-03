@@ -21,62 +21,91 @@
                 android:layout_height="match_parent">
 
                 <TextView
-                    android:id="@+id/data"
-                    android:layout_width="wrap_content"
-                    android:layout_height="38dp"
-                    android:layout_margin="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    android:text="Selecione a data:"
+                    android:id="@+id/txtdata"
+                    android:layout_margin="8dp"
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="Data:"
+                    android:textColor="#000"
                     android:textSize="20sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.144" />
+                    app:layout_constraintVertical_bias="0.050000012" />
 
                 <EditText
-                    android:id="@+id/dataHoje"
-                    android:layout_width="0dp"
-                    android:layout_height="40dp"
-                    android:layout_margin="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginStart="8dp"
+                    android:id="@+id/data"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="data"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.536"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="0.42"
+                    app:layout_constraintStart_toEndOf="@+id/txtdata"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.277" />
+                    app:layout_constraintVertical_bias="0.050000012" />
+
+                <TextView
+                    android:id="@+id/txthora"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="Horário:"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/data"
+                    app:layout_constraintVertical_bias="0.18" />
+
+                <EditText
+                    android:id="@+id/hora"
+                    android:layout_width="200dp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:hint="hora"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.63"
+                    app:layout_constraintStart_toEndOf="@+id/txthora"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.19999999" />
+
+                <TextView
+                    android:id="@+id/txtkm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="8dp"
+                    android:text="Quilometragem"
+                    android:textColor="#000"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.05"
+                    app:layout_constraintStart_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/data"
+                    app:layout_constraintVertical_bias="0.35000002" />
 
                 <EditText
                     android:id="@+id/km"
-                    android:layout_width="60dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:gravity="center"
-                    android:hint="KM"
-                    app:layout_constraintBottom_toTopOf="@+id/obs"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.85" />
-
-                <EditText
-                    android:id="@+id/obs"
-                    android:layout_width="match_parent"
+                    android:layout_width="150dp"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-                    android:hint="Observações"
+                    android:hint="km"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="1.0"
-                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintHorizontal_bias="0.49"
+                    app:layout_constraintStart_toEndOf="@+id/txtkm"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.59000003" />
+                    app:layout_constraintVertical_bias="0.37" />
 
                 <Button
-                    android:id="@+id/proximaPergunta"
+                    android:id="@+id/salvar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:background="@drawable/fundoretangulo"
@@ -88,7 +117,8 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/obs" />
+                    app:layout_constraintTop_toBottomOf="@+id/txtkm"
+                    app:layout_constraintVertical_bias="0.43" />
 
             </android.support.constraint.ConstraintLayout>
         </android.support.v7.widget.CardView>

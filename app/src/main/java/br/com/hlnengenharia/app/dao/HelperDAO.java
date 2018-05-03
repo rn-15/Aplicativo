@@ -13,7 +13,7 @@ public class HelperDAO extends SQLiteOpenHelper {
 
 
     private static final String NOME = "BD_APLICATIVO";
-    private static final int VERSAO = 16;
+    private static final int VERSAO = 17;
 
     public HelperDAO(Context context) {
         super(context, NOME, null, VERSAO);
@@ -42,7 +42,7 @@ public class HelperDAO extends SQLiteOpenHelper {
         String carroRespostaSQL = "CREATE TABLE CarroResposta (cresposta_id INTEGER PRIMARY KEY," +
                 "idCarro INTEGER REFERENCES Carro(carro_id)," +
                 "idPergunta INTEGER REFERENCES CarroPergunta(cpergunta_id)," +
-                "cresposta_desc TEXT);";
+                "cresposta_desc TEXT, cdata TEXT, chora TEXT);";
 
 
 
