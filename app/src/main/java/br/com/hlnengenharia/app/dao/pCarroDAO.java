@@ -52,16 +52,20 @@ public class pCarroDAO implements Closeable {
             values.put("idCarro", resposta.getIdCarro());
             values.put("idPergunta", resposta.getIdPergunta());
             values.put("cresposta_desc", resposta.getResposta());
-            values.put("cdata", resposta.getData());
-            values.put("chora", resposta.getHora());
+            values.put("cresposta_obs", resposta.getObs());
         dao.getWritableDatabase().insert("CarroResposta", null, values);
     }
 
-    public List<RespostaCarro> buscaResposta() {
+    public List<RespostaCarro> buscaResposta(Long idCar) {
         List<RespostaCarro> respostas = new ArrayList<>();
-        Cursor c = dao.getReadableDatabase().rawQuery("SELECT * FROM CarroResposta",null);
+        Cursor c = dao.getReadableDatabase().rawQuery("SELECT * FROM DiaHora JOIN Carro ON idCarro=carro_id WHERE idCarro=?",new String[]{idCar.toString()});
         while (c.moveToNext()){
-            respostas.add(criaResposta(c));
+            RespostaCarro r = new RespostaCarro();
+                r.setIdCarro(c.getLong(c.getColumnIndex("idCarro")));
+                r.setData(c.getString(c.getColumnIndex("dia")));
+                r.setHora(c.getString(c.getColumnIndex("hora")));
+                r.setKm(c.getString(c.getColumnIndex("km")));
+         respostas.add(r);
         }c.close();
         return respostas;
     }
@@ -73,7 +77,16 @@ public class pCarroDAO implements Closeable {
         r.setIdCarro(c.getLong(c.getColumnIndex("idCarro")));
         r.setIdPergunta(c.getLong(c.getColumnIndex("idPergunta")));
         r.setResposta(c.getString(c.getColumnIndex("cresposta_desc")));
+        r.setObs(c.getString(c.getColumnIndex("cresposta_obs")));
         return r;
     }
 
+    public void pega(RespostaCarro horaData) {
+        ContentValues values = new ContentValues();
+            values.put("idCarro", horaData.getIdCarro());
+            values.put("dia", horaData.getData());
+            values.put("hora", horaData.getHora());
+            values.put("km", horaData.getKm());
+        dao.getWritableDatabase().insert("DiaHora", null, values);
+    }
 }

@@ -9,6 +9,24 @@ public class RespostaCarro implements Serializable {
     private String resposta;
     private String data;
     private String hora;
+    private String obs;
+    private String km;
+
+    public String getKm() {
+        return km;
+    }
+
+    public void setKm(String km) {
+        this.km = km;
+    }
+
+    public String getObs() {
+        return obs;
+    }
+
+    public void setObs(String obs) {
+        this.obs = obs;
+    }
 
     public String getHora() {
         return hora;
@@ -60,6 +78,6 @@ public class RespostaCarro implements Serializable {
 
     @Override
     public String toString() {
-        return getResposta();
+        return getData();
     }
 }

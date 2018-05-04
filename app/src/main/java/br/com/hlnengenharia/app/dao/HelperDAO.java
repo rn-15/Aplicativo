@@ -13,7 +13,7 @@ public class HelperDAO extends SQLiteOpenHelper {
 
 
     private static final String NOME = "BD_APLICATIVO";
-    private static final int VERSAO = 17;
+    private static final int VERSAO = 19;
 
     public HelperDAO(Context context) {
         super(context, NOME, null, VERSAO);
@@ -42,7 +42,9 @@ public class HelperDAO extends SQLiteOpenHelper {
         String carroRespostaSQL = "CREATE TABLE CarroResposta (cresposta_id INTEGER PRIMARY KEY," +
                 "idCarro INTEGER REFERENCES Carro(carro_id)," +
                 "idPergunta INTEGER REFERENCES CarroPergunta(cpergunta_id)," +
-                "cresposta_desc TEXT, cdata TEXT, chora TEXT);";
+                "cresposta_desc TEXT, cresposta_obs TEXT);";
+        String carroHoraDataSQL = "CREATE TABLE DiaHora(dh_id INTEGER PRIMARY KEY, dia TEXT, hora TEXT, km TEXT, " +
+                "idCarro INTEGER REFERENCES Carro);";
 
 
 
@@ -57,6 +59,7 @@ public class HelperDAO extends SQLiteOpenHelper {
         db.execSQL(carroSQL);
         db.execSQL(carroPerguntaSQL);
         db.execSQL(carroRespostaSQL);
+        db.execSQL(carroHoraDataSQL);
 
     }
 
@@ -73,6 +76,7 @@ public class HelperDAO extends SQLiteOpenHelper {
         String carroSQL = "DROP TABLE IF EXISTS Carro";
         String carroPerguntaSQL = "DROP TABLE IF EXISTS CarroPergunta;";
         String carroRespostaSQL = "DROP TABLE IF EXISTS CarroResposta;";
+        String carroHoraDataSQL = "DROP TABLE IF EXISTS DiaHora;";
 
         db.execSQL(userSQL);
         db.execSQL(empresaSQL);
@@ -85,6 +89,7 @@ public class HelperDAO extends SQLiteOpenHelper {
         db.execSQL(carroSQL);
         db.execSQL(carroPerguntaSQL);
         db.execSQL(carroRespostaSQL);
+        db.execSQL(carroHoraDataSQL);
 
         onCreate(db);
     }

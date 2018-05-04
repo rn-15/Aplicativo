@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
@@ -27,11 +28,13 @@ import br.com.hlnengenharia.app.model.RespostaCarro;
 public class InspecaoActivity extends AppCompatActivity {
 
     private TextView nomeInsp, campoPergunta,idCarro,idPergunta;
+    private EditText observacao;
     private int indicePerguntaAtual = 0;
     private Button proximaPergunta;
     private PerguntaCarro perguntaAtual;
     private RadioButton c,nc,na;
     private RadioGroup rg;
+    private Carro carro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,9 +67,7 @@ public class InspecaoActivity extends AppCompatActivity {
         List<PerguntaCarro> perguntas = dao.buscaPerguntaCarro();
 
         if (indicePerguntaAtual < perguntas.size()) {
-
             perguntaAtual = perguntas.get(indicePerguntaAtual);
-
             campoPergunta.setText(perguntaAtual.getPergunta());
             idPergunta.setText(perguntaAtual.getId().toString());
 
@@ -85,6 +86,7 @@ public class InspecaoActivity extends AppCompatActivity {
 
             resposta.setIdCarro(Long.valueOf(idCarro.getText().toString()));
             resposta.setIdPergunta(Long.valueOf(idPergunta.getText().toString()));
+            resposta.setObs(observacao.getText().toString());
 
             if (c.isChecked()) {
                 resposta.setResposta(c.getText().toString());
@@ -106,6 +108,8 @@ public class InspecaoActivity extends AppCompatActivity {
         campoPergunta = findViewById(R.id.pergunta);
         proximaPergunta = findViewById(R.id.proximaPergunta);
         campoPergunta = findViewById(R.id.pergunta);
+        observacao = findViewById(R.id.observacao);
+
         c = findViewById(R.id.conforme);
         nc = findViewById(R.id.nConforme);
         na = findViewById(R.id.nSeAplica);
@@ -120,12 +124,12 @@ public class InspecaoActivity extends AppCompatActivity {
             nomeInsp = findViewById(R.id.nomeInsp);
             nomeInsp.setText(inspecao.getNome());
         } else {
-            Intent intent = getIntent();
-            Carro carro = (Carro) intent.getSerializableExtra("carro");
-            nomeInsp = findViewById(R.id.nomeInsp);
-            nomeInsp.setText(carro.getNome());
-            idCarro = findViewById(R.id.idCarro);
-            idCarro.setText(carro.getId().toString());
+     //       Intent intent = getIntent();
+  //          Carro carro = (Carro) intent.getSerializableExtra("carro");
+    //        nomeInsp = findViewById(R.id.nomeInsp);
+    //     nomeInsp.setText(carro.getNome());
+     //       idCarro = findViewById(R.id.idCarro);
+    //        idCarro.setText(carro.getId().toString());
         }
     }
 }

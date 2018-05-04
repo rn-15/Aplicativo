@@ -13,6 +13,7 @@ import java.util.List;
 
 import br.com.hlnengenharia.app.InspecaoActivity;
 import br.com.hlnengenharia.app.R;
+import br.com.hlnengenharia.app.cadastro.CadDataKmActivity;
 import br.com.hlnengenharia.app.dao.pCarroDAO;
 import br.com.hlnengenharia.app.model.Carro;
 import br.com.hlnengenharia.app.model.RespostaCarro;
@@ -39,7 +40,7 @@ public class ListaInspecoesActivity extends AppCompatActivity {
         novaInspecao.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent vaiParaInspecao = new Intent(ListaInspecoesActivity.this, InspecaoActivity.class);
+                Intent vaiParaInspecao = new Intent(ListaInspecoesActivity.this, CadDataKmActivity.class);
                 vaiParaInspecao.putExtra("carro", carro);
                 startActivity(vaiParaInspecao);
             }
@@ -60,7 +61,9 @@ public class ListaInspecoesActivity extends AppCompatActivity {
     private void carregaListaInspecoes() {
         pCarroDAO dao = new pCarroDAO(ListaInspecoesActivity.this);
 
-        List<RespostaCarro> respostaCarros = dao.buscaResposta();
+        Long idCar = carro.getId();
+
+        List<RespostaCarro> respostaCarros = dao.buscaResposta(idCar);
         dao.close();
         listaRespostas = findViewById(R.id.lista_insp);
         ArrayAdapter<RespostaCarro> adapter = new ArrayAdapter<RespostaCarro>(this, android.R.layout.simple_list_item_1, respostaCarros);
