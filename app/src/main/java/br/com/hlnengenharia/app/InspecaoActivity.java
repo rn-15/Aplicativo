@@ -43,10 +43,12 @@ public class InspecaoActivity extends AppCompatActivity {
 
         setTitle("");
 
-        carregaNomeDoCheckList();
+
         criarComponentes();
-        botaoProximo();
+        carregaNomeDoCheckList();
         atualizaFormularioComPerguntaAtual();
+        botaoProximo();
+
 
     }
 
@@ -124,12 +126,12 @@ public class InspecaoActivity extends AppCompatActivity {
             nomeInsp = findViewById(R.id.nomeInsp);
             nomeInsp.setText(inspecao.getNome());
         } else {
-     //       Intent intent = getIntent();
-  //          Carro carro = (Carro) intent.getSerializableExtra("carro");
-    //        nomeInsp = findViewById(R.id.nomeInsp);
-    //     nomeInsp.setText(carro.getNome());
-     //       idCarro = findViewById(R.id.idCarro);
-    //        idCarro.setText(carro.getId().toString());
+           Intent intent = getIntent();
+            Carro carro = (Carro) intent.getSerializableExtra("carro");
+            nomeInsp = findViewById(R.id.nomeInsp);
+            nomeInsp.setText(carro.getNome());
+            idCarro = findViewById(R.id.idCarro);
+            idCarro.setText(carro.getId().toString());
         }
     }
 }
