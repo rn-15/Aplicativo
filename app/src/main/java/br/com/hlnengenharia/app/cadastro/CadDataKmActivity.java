@@ -29,7 +29,6 @@ public class CadDataKmActivity extends AppCompatActivity {
     private EditText data, edthora, km;
     private Button salvar;
     private TextView idCarro, carronome;
-    private Carro carro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,16 +37,20 @@ public class CadDataKmActivity extends AppCompatActivity {
 
         setTitle("");
 
+
+        carregaDadosCarro();
+
         calendario();
         mostraCalendario();
         carregaHora();
         botaoSalvar();
+    }
 
-
+    private void carregaDadosCarro() {
         Intent intent = getIntent();
         Carro carro = (Carro) intent.getSerializableExtra("carro");
-        carronome = findViewById(R.id.carronome);
-        carronome.setText(carro.getNome());
+     //   carronome = findViewById(R.id.carronome);
+     //   carronome.setText(carro.getNome());
         idCarro = findViewById(R.id.carroid);
         idCarro.setText(carro.getId().toString());
     }

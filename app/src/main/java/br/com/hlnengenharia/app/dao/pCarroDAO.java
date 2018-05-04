@@ -56,9 +56,9 @@ public class pCarroDAO implements Closeable {
         dao.getWritableDatabase().insert("CarroResposta", null, values);
     }
 
-    public List<RespostaCarro> buscaResposta(Long idCar) {
+    public List<RespostaCarro> buscaData(Long idCar) {
         List<RespostaCarro> respostas = new ArrayList<>();
-        Cursor c = dao.getReadableDatabase().rawQuery("SELECT * FROM DiaHora JOIN Carro ON idCarro=carro_id WHERE idCarro=?",new String[]{idCar.toString()});
+        Cursor c = dao.getReadableDatabase().rawQuery("SELECT * FROM DiaHora JOIN Carro ON idCarro= carro_id WHERE idCarro=?", new String[]{idCar.toString()});
         while (c.moveToNext()){
             RespostaCarro r = new RespostaCarro();
                 r.setIdCarro(c.getLong(c.getColumnIndex("idCarro")));

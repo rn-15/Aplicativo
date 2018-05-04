@@ -30,12 +30,16 @@ public class ListaInspecoesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lista_inspecoes);
 
-
-        carregaListaInspecoes();
         setTitle("");
 
         carregaNomeCarro();
+        carregaListaInspecoes();
 
+        botaoNovo();
+
+    }
+
+    private void botaoNovo() {
         novaInspecao = findViewById(R.id.nova_insp);
         novaInspecao.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -45,7 +49,6 @@ public class ListaInspecoesActivity extends AppCompatActivity {
                 startActivity(vaiParaInspecao);
             }
         });
-
     }
 
     private void carregaNomeCarro() {
@@ -59,14 +62,20 @@ public class ListaInspecoesActivity extends AppCompatActivity {
     }
 
     private void carregaListaInspecoes() {
-        pCarroDAO dao = new pCarroDAO(ListaInspecoesActivity.this);
+        pCarroDAO dao = new pCarroDAO(this);
 
         Long idCar = carro.getId();
 
-        List<RespostaCarro> respostaCarros = dao.buscaResposta(idCar);
+        List<RespostaCarro> respostaCarros = dao.buscaData(idCar);
         dao.close();
         listaRespostas = findViewById(R.id.lista_insp);
         ArrayAdapter<RespostaCarro> adapter = new ArrayAdapter<RespostaCarro>(this, android.R.layout.simple_list_item_1, respostaCarros);
         listaRespostas.setAdapter(adapter);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        carregaListaInspecoes();
     }
 }
