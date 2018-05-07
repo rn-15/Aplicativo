@@ -20,6 +20,7 @@ import java.util.List;
 import br.com.hlnengenharia.app.cadastro.CadDataKmActivity;
 import br.com.hlnengenharia.app.dao.pCarroDAO;
 import br.com.hlnengenharia.app.model.Carro;
+import br.com.hlnengenharia.app.model.DataHoraCarro;
 import br.com.hlnengenharia.app.model.Inspecao;
 import br.com.hlnengenharia.app.model.PerguntaCarro;
 import br.com.hlnengenharia.app.model.RespostaCarro;
@@ -27,7 +28,7 @@ import br.com.hlnengenharia.app.model.RespostaCarro;
 
 public class InspecaoActivity extends AppCompatActivity {
 
-    private TextView nomeInsp, campoPergunta, idCarro, idPergunta;
+    private TextView nomeInsp, campoPergunta, idCarro, idPergunta, idHora;
     private EditText observacao;
     private int indicePerguntaAtual = 0;
     private Button proximaPergunta;
@@ -45,16 +46,17 @@ public class InspecaoActivity extends AppCompatActivity {
 
         criarComponentes();
 
-
+        carregaDataInspecao();
         atualizaFormularioComPerguntaAtual();
         botaoProximo();
 
-
-
     }
 
-    private void carregaNomeInspecao() {
-
+    private void carregaDataInspecao() {
+        Intent intent = getIntent();
+        DataHoraCarro dataHoraCarro = (DataHoraCarro) intent.getSerializableExtra("data");
+        nomeInsp = findViewById(R.id.nomeInsp);
+        nomeInsp.setText(dataHoraCarro.getData());
     }
 
     private void botaoProximo() {
@@ -90,6 +92,7 @@ public class InspecaoActivity extends AppCompatActivity {
 
         resposta.setIdCarro(Long.valueOf(idCarro.getText().toString()));
         resposta.setIdPergunta(Long.valueOf(idPergunta.getText().toString()));
+        resposta.setIdHora(Long.valueOf(idHora.getText().toString()));
         resposta.setObs(observacao.getText().toString());
 
         if (c.isChecked()) {
@@ -113,6 +116,7 @@ public class InspecaoActivity extends AppCompatActivity {
         proximaPergunta = findViewById(R.id.proximaPergunta);
         campoPergunta = findViewById(R.id.pergunta);
         observacao = findViewById(R.id.observacao);
+        idHora = findViewById(R.id.idHora);
 
         c = findViewById(R.id.conforme);
         nc = findViewById(R.id.nConforme);

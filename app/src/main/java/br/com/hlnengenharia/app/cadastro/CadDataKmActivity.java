@@ -79,7 +79,6 @@ public class CadDataKmActivity extends AppCompatActivity {
                 dao.close();
                 finish();
 
-                
             }
         });
     }

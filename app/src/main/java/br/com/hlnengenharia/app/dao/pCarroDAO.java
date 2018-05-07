@@ -52,6 +52,7 @@ public class pCarroDAO implements Closeable {
         ContentValues values = new ContentValues();
             values.put("idCarro", resposta.getIdCarro());
             values.put("idPergunta", resposta.getIdPergunta());
+            values.put("idHora", resposta.getIdHora());
             values.put("cresposta_desc", resposta.getResposta());
             values.put("cresposta_obs", resposta.getObs());
         dao.getWritableDatabase().insert("CarroResposta", null, values);
@@ -72,16 +73,6 @@ public class pCarroDAO implements Closeable {
         return respostas;
     }
 
-    @NonNull
-    private RespostaCarro criaResposta(Cursor c) {
-        RespostaCarro r = new RespostaCarro();
-        r.setId(c.getLong(c.getColumnIndex("cresposta_id")));
-        r.setIdCarro(c.getLong(c.getColumnIndex("idCarro")));
-        r.setIdPergunta(c.getLong(c.getColumnIndex("idPergunta")));
-        r.setResposta(c.getString(c.getColumnIndex("cresposta_desc")));
-        r.setObs(c.getString(c.getColumnIndex("cresposta_obs")));
-        return r;
-    }
 
     public void pega(DataHoraCarro horaData) {
         ContentValues values = new ContentValues();
@@ -92,5 +83,9 @@ public class pCarroDAO implements Closeable {
             values.put("idCarro", horaData.getIdCarro());
 
         dao.getWritableDatabase().insert("DiaHora", null, values);
+    }
+
+    public void deleta(DataHoraCarro dataHoraCarro) {
+        dao.getWritableDatabase().delete("DiaHora", "dh_id=?", new String[]{dataHoraCarro.getId().toString()});
     }
 }

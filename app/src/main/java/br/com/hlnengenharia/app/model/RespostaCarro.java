@@ -6,8 +6,17 @@ public class RespostaCarro implements Serializable {
     private Long id;
     private Long idCarro;
     private Long idPergunta;
+    private Long idHora;
     private String resposta;
     private String obs;
+
+    public Long getIdHora() {
+        return idHora;
+    }
+
+    public void setIdHora(Long idHora) {
+        this.idHora = idHora;
+    }
 
     public String getObs() {
         return obs;
