@@ -71,7 +71,7 @@ public class ListaInspecaoActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent vaiParaInspecoes = new Intent(ListaInspecaoActivity.this, InspecaoActivity.class);
                 Inspecao inspecao = (Inspecao) listaInspecao.getItemAtPosition(position);
-                vaiParaInspecoes.putExtra("nome", inspecao);
+                vaiParaInspecoes.putExtra("inspecao", inspecao);
                 startActivity(vaiParaInspecoes);
             }
         });

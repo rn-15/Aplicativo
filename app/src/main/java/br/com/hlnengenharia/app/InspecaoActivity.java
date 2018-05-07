@@ -27,12 +27,12 @@ import br.com.hlnengenharia.app.model.RespostaCarro;
 
 public class InspecaoActivity extends AppCompatActivity {
 
-    private TextView nomeInsp, campoPergunta,idCarro,idPergunta;
+    private TextView nomeInsp, campoPergunta, idCarro, idPergunta;
     private EditText observacao;
     private int indicePerguntaAtual = 0;
     private Button proximaPergunta;
     private PerguntaCarro perguntaAtual;
-    private RadioButton c,nc,na;
+    private RadioButton c, nc, na;
     private RadioGroup rg;
     private Carro carro;
 
@@ -43,12 +43,17 @@ public class InspecaoActivity extends AppCompatActivity {
 
         setTitle("");
 
-
         criarComponentes();
-        carregaNomeDoCheckList();
+
+
         atualizaFormularioComPerguntaAtual();
         botaoProximo();
 
+
+
+    }
+
+    private void carregaNomeInspecao() {
 
     }
 
@@ -73,10 +78,7 @@ public class InspecaoActivity extends AppCompatActivity {
             campoPergunta.setText(perguntaAtual.getPergunta());
             idPergunta.setText(perguntaAtual.getId().toString());
 
-        }else if(idPergunta!=null){
-            Intent intent = new Intent(InspecaoActivity.this, CadDataKmActivity.class);
-            startActivity(intent);
-        }else{
+        } else {
             Toast.makeText(this, "Não há perguntas", Toast.LENGTH_SHORT).show();
         }
 
@@ -86,19 +88,19 @@ public class InspecaoActivity extends AppCompatActivity {
         RespostaCarro resposta = new RespostaCarro();
         pCarroDAO dao = new pCarroDAO(InspecaoActivity.this);
 
-            resposta.setIdCarro(Long.valueOf(idCarro.getText().toString()));
-            resposta.setIdPergunta(Long.valueOf(idPergunta.getText().toString()));
-            resposta.setObs(observacao.getText().toString());
+        resposta.setIdCarro(Long.valueOf(idCarro.getText().toString()));
+        resposta.setIdPergunta(Long.valueOf(idPergunta.getText().toString()));
+        resposta.setObs(observacao.getText().toString());
 
-            if (c.isChecked()) {
-                resposta.setResposta(c.getText().toString());
-            } else if (nc.isChecked()) {
-                resposta.setResposta(nc.getText().toString());
-            } else {
-                resposta.setResposta(na.getText().toString());
-            }
-            dao.inserir(resposta);
-            atualizaFormularioComPerguntaAtual();
+        if (c.isChecked()) {
+            resposta.setResposta(c.getText().toString());
+        } else if (nc.isChecked()) {
+            resposta.setResposta(nc.getText().toString());
+        } else {
+            resposta.setResposta(na.getText().toString());
+        }
+        dao.inserir(resposta);
+        atualizaFormularioComPerguntaAtual();
 
     }
 
@@ -119,19 +121,4 @@ public class InspecaoActivity extends AppCompatActivity {
     }
 
 
-    private void carregaNomeDoCheckList() {
-        if (nomeInsp != null) {
-            Intent intent = getIntent();
-            Inspecao inspecao = (Inspecao) intent.getSerializableExtra("nome");
-            nomeInsp = findViewById(R.id.nomeInsp);
-            nomeInsp.setText(inspecao.getNome());
-        } else {
-           Intent intent = getIntent();
-            Carro carro = (Carro) intent.getSerializableExtra("carro");
-            nomeInsp = findViewById(R.id.nomeInsp);
-            nomeInsp.setText(carro.getNome());
-            idCarro = findViewById(R.id.idCarro);
-            idCarro.setText(carro.getId().toString());
-        }
-    }
 }

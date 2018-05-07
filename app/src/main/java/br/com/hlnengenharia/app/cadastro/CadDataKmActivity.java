@@ -21,6 +21,7 @@ import br.com.hlnengenharia.app.InspecaoActivity;
 import br.com.hlnengenharia.app.R;
 import br.com.hlnengenharia.app.dao.pCarroDAO;
 import br.com.hlnengenharia.app.model.Carro;
+import br.com.hlnengenharia.app.model.DataHoraCarro;
 import br.com.hlnengenharia.app.model.RespostaCarro;
 
 public class CadDataKmActivity extends AppCompatActivity {
@@ -29,7 +30,7 @@ public class CadDataKmActivity extends AppCompatActivity {
     private EditText data, edthora, km;
     private Button salvar;
     private TextView idCarro, carronome;
-    private Carro carro;
+    private RespostaCarro respostaCarro;
 
 
     @Override
@@ -39,12 +40,10 @@ public class CadDataKmActivity extends AppCompatActivity {
 
         setTitle("");
 
-
-        carregaDadosCarro();
-
         calendario();
         mostraCalendario();
         carregaHora();
+        carregaDadosCarro();
         botaoSalvar();
     }
 
@@ -57,18 +56,18 @@ public class CadDataKmActivity extends AppCompatActivity {
         idCarro.setText(carro.getId().toString());
     }
 
+
     private void botaoSalvar() {
         salvar = findViewById(R.id.salvar);
         salvar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                edthora = findViewById(R.id.hora);
                 data = findViewById(R.id.data);
                 km = findViewById(R.id.km);
                 idCarro = findViewById(R.id.carroid);
 
                 pCarroDAO dao = new pCarroDAO(CadDataKmActivity.this);
-                RespostaCarro horaData = new RespostaCarro();
+                DataHoraCarro horaData = new DataHoraCarro();
 
                 horaData.setIdCarro(Long.valueOf(idCarro.getText().toString()));
                 horaData.setData(data.getText().toString());
@@ -80,9 +79,7 @@ public class CadDataKmActivity extends AppCompatActivity {
                 dao.close();
                 finish();
 
-                Intent intent = new Intent(CadDataKmActivity.this, InspecaoActivity.class);
-                intent.putExtra("carro", carro);
-                startActivity(intent);
+                
             }
         });
     }

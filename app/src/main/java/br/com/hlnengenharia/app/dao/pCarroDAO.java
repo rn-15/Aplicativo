@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.com.hlnengenharia.app.model.DataHoraCarro;
 import br.com.hlnengenharia.app.model.PerguntaCarro;
 import br.com.hlnengenharia.app.model.RespostaCarro;
 
@@ -56,15 +57,16 @@ public class pCarroDAO implements Closeable {
         dao.getWritableDatabase().insert("CarroResposta", null, values);
     }
 
-    public List<RespostaCarro> buscaData(Long idCar) {
-        List<RespostaCarro> respostas = new ArrayList<>();
+    public List<DataHoraCarro> buscaData(Long idCar) {
+        List<DataHoraCarro> respostas = new ArrayList<>();
         Cursor c = dao.getReadableDatabase().rawQuery("SELECT * FROM DiaHora JOIN Carro ON idCarro= carro_id WHERE idCarro=?", new String[]{idCar.toString()});
         while (c.moveToNext()){
-            RespostaCarro r = new RespostaCarro();
-                r.setIdCarro(c.getLong(c.getColumnIndex("idCarro")));
+            DataHoraCarro r = new DataHoraCarro();
+                r.setId(c.getLong(c.getColumnIndex("dh_id")));
                 r.setData(c.getString(c.getColumnIndex("dia")));
                 r.setHora(c.getString(c.getColumnIndex("hora")));
                 r.setKm(c.getString(c.getColumnIndex("km")));
+                r.setIdCarro(c.getLong(c.getColumnIndex("idCarro")));
          respostas.add(r);
         }c.close();
         return respostas;
@@ -81,12 +83,14 @@ public class pCarroDAO implements Closeable {
         return r;
     }
 
-    public void pega(RespostaCarro horaData) {
+    public void pega(DataHoraCarro horaData) {
         ContentValues values = new ContentValues();
-            values.put("idCarro", horaData.getIdCarro());
+
             values.put("dia", horaData.getData());
             values.put("hora", horaData.getHora());
             values.put("km", horaData.getKm());
+            values.put("idCarro", horaData.getIdCarro());
+
         dao.getWritableDatabase().insert("DiaHora", null, values);
     }
 }

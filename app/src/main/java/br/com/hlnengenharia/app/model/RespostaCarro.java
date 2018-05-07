@@ -7,18 +7,7 @@ public class RespostaCarro implements Serializable {
     private Long idCarro;
     private Long idPergunta;
     private String resposta;
-    private String data;
-    private String hora;
     private String obs;
-    private String km;
-
-    public String getKm() {
-        return km;
-    }
-
-    public void setKm(String km) {
-        this.km = km;
-    }
 
     public String getObs() {
         return obs;
@@ -26,22 +15,6 @@ public class RespostaCarro implements Serializable {
 
     public void setObs(String obs) {
         this.obs = obs;
-    }
-
-    public String getHora() {
-        return hora;
-    }
-
-    public void setHora(String hora) {
-        this.hora = hora;
-    }
-
-    public String getData() {
-        return data;
-    }
-
-    public void setData(String data) {
-        this.data = data;
     }
 
     public Long getId() {
@@ -76,8 +49,4 @@ public class RespostaCarro implements Serializable {
         this.resposta = resposta;
     }
 
-    @Override
-    public String toString() {
-        return getData();
-    }
 }

@@ -13,7 +13,7 @@ public class HelperDAO extends SQLiteOpenHelper {
 
 
     private static final String NOME = "BD_APLICATIVO";
-    private static final int VERSAO = 20;
+    private static final int VERSAO = 21;
 
     public HelperDAO(Context context) {
         super(context, NOME, null, VERSAO);
@@ -39,12 +39,15 @@ public class HelperDAO extends SQLiteOpenHelper {
 
         String carroSQL = "CREATE TABLE Carro (carro_id INTEGER PRIMARY KEY, carro_nome TEXT NOT NULL);";
         String carroPerguntaSQL = "CREATE TABLE CarroPergunta (cpergunta_id INTEGER PRIMARY KEY, cpergunta TEXT NOT NULL);";
+        String carroHoraDataSQL = "CREATE TABLE DiaHora(dh_id INTEGER PRIMARY KEY, dia TEXT, hora TEXT, km TEXT, " +
+                "idCarro TEXT NOT NULL, FOREIGN KEY (idCarro) REFERENCES Carro(carro_id));";
+
         String carroRespostaSQL = "CREATE TABLE CarroResposta (cresposta_id INTEGER PRIMARY KEY," +
                 "idCarro INTEGER REFERENCES Carro(carro_id)," +
                 "idPergunta INTEGER REFERENCES CarroPergunta(cpergunta_id)," +
+                "idHora INTEGER REFERENCES carroHoraDataSQL (dh_id)," +
                 "cresposta_desc TEXT, cresposta_obs TEXT);";
-        String carroHoraDataSQL = "CREATE TABLE DiaHora(dh_id INTEGER PRIMARY KEY, dia TEXT, hora TEXT, km TEXT, " +
-                "idCarro TEXT NOT NULL, FOREIGN KEY (idCarro) REFERENCES Carro(carro_id));";
+
 
 
 
