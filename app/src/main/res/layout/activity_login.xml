@@ -48,11 +48,12 @@
 
             <EditText
                 android:id="@+id/login_senha"
-                android:hint="Senha"
-                android:gravity="center"
                 android:layout_width="match_parent"
                 android:layout_height="55dp"
                 android:layout_margin="16dp"
+                android:gravity="center"
+                android:hint="Senha"
+                android:inputType="textPassword"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
